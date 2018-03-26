@@ -3,12 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
+// Load routes.
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newRouter = require('./routes/new');
 
+// Load models.
+var models = require('./models/index');
+
 var app = express();
+// Set up MongoDB connection.
+var mongodbUrl = 'mongodb://localhost:4000/demodb';
+mongoose.connect(mongodbUrl);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,6 +27,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Make models available to the route handlers.
+app.use(function(req, res, next) {
+    if (!models.Task) {
+	return next(new Error('No models'));
+    }
+    req.models = models;
+    return next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

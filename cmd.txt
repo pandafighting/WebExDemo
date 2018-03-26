@@ -1,0 +1,9 @@
+# start mongodb
+mongod --fork --logpath mongodb/log/log.txt --dbpath mongodb/data/ --port 4000
+# DB data at mongodb/data
+# DB log at mongodb/log
+# Start mongo client use: mongo --port 4000
+# Install notes: https://docs.mongodb.com/v3.0/tutorial/install-mongodb-on-ubuntu/
+
+# start web server
+npm start

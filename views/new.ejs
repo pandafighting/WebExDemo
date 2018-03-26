@@ -10,27 +10,31 @@
     <div class="ui container">
       <h3>Create Request</h3>
 
-      <form class="ui form">
+      <form class="ui form" method = "post">
 	<div class="field">
 	  <label>URL to download recording (.mp4)</label>
-	  <input type="text" name="url" placeholder="">
+	  <input type="text" name="url" placeholder=""  value="<%= data.url %>">
 	</div>
 	<div class="field">
 	  <label>Password</label>
-	  <input type="text" name="password" placeholder="">
+	  <input type="text" name="password" placeholder="" value="<%= data.password %>">
 	</div>
 	<div class="field">
 	  <label>SR#</label>
-	  <input type="text" name="sr" placeholder="">
+	  <input type="text" name="sr" placeholder="" value="<%= data.sr %>">
 	</div>
 	<div class="field">
 	  <label>User Id</label>
-	  <input type="text" name="user" placeholder="">
+	  <input type="text" name="user" placeholder="" value="<%= data.user %>">
 	</div>
 
 	<button class="ui button" type="submit">Submit</button>
       </form>
 
+      <div class="ui message" >
+	<div class="header"><%= data.msgHeader %></div>
+	<p><%= data.msgBody %></p>
+      </div>
     </div>
   </body>
 </html>
