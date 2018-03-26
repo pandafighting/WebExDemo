@@ -16,6 +16,13 @@ var taskSchema = mongoose.Schema({
     sr: {
 	type: String,
 	required: true
+    },
+    status: {
+	type: Number,
+	get: v => Math.round(v),
+	set: v => Math.round(v),
+	required: true,
+	default: 0
     }
 });
 
