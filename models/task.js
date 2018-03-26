@@ -5,15 +5,11 @@ var taskSchema = mongoose.Schema({
 	type: String,
 	required: true
     },
-    url: {
-	type: String,
-	required: true
-    },
-    password: {
-	type: String,
-	required: true
-    },
     sr: {
+	type: String,
+	required: true
+    },
+    video: {
 	type: String,
 	required: true
     },
