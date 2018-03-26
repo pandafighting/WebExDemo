@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 // Load routes.
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
 var newRouter = require('./routes/new');
 
 // Load models.
@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/new', newRouter);
 
 // catch 404 and forward to error handler

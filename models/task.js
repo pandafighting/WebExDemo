@@ -21,9 +21,12 @@ var taskSchema = mongoose.Schema({
 
 // Add a static method to this model.
 taskSchema.static({
-  list: function(callback) {
-    this.find({}, null, {}, callback);
-  }
+    list: function(callback) {
+	this.find({}, null, {}, callback);
+    },
+    findByUser: function(userid, callback) {
+	this.find({'user': userid}, null, {}, callback);
+    }
 });
 
 module.exports = mongoose.model('Task', taskSchema);
