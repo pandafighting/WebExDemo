@@ -39,8 +39,8 @@ router.post('/', function(req, res, next) {
     // Save file first.
     var basedir = path.join('/home/cisco/qishao/WebExDemo/tmp', Date.now().toString());
     fs.mkdirSync(basedir, 0740);
-    var videoLocation = path.join(basedir, 'videofile');
     var webexfile = req.files.webexfile;
+    var videoLocation = path.join(basedir, webexfile.name);
     webexfile.mv(videoLocation)
 	.then(function(err) {
 	    if (err) {
