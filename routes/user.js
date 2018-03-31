@@ -9,7 +9,16 @@ router.get('/:userid', function(req, res, next) {
 	    console.log(err);
 	    return;
 	}
-	res.render('user', { 'tasks': tasks });
+	annotatedTasks = tasks.map(task => {
+	    const status = task.status;
+	    if (status == 0) {
+		task.status_name = 'Processing';
+	    } else {
+		task.status_name = 'Unknown';
+	    }
+	    return task;
+	});
+	res.render('user', { 'tasks': annotatedTasks });
     });
 });
 

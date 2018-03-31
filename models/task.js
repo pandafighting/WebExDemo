@@ -9,7 +9,11 @@ var taskSchema = mongoose.Schema({
 	type: String,
 	required: true
     },
-    video: {
+    basedir: {
+	type: String,
+	required: true
+    },
+    videofile: {
 	type: String,
 	required: true
     },

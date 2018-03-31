@@ -13,8 +13,8 @@
 	<thead>
 	  <tr>
 	    <th>RequestId</th>
-	    <th>DownloadUrl</th>
 	    <th>SR#</th>
+	    <th>Status</th>
 	</tr></thead>
 	<tbody>
 	  <% for (var i = 0; i < tasks.length; i++) { %>
@@ -23,10 +23,10 @@
 	      <%= tasks[i]._id %>
 	    </td>
 	    <td>
-	      <%= tasks[i].url %>
+	      <%= tasks[i].sr %>
 	    </td>
 	    <td>
-	      <%= tasks[i].sr %>
+	      <%= tasks[i].status_name %>
 	    </td>
 	  </tr>
 	  <% } %>

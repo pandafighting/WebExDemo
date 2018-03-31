@@ -37,9 +37,9 @@ router.post('/', function(req, res, next) {
 	return;
     }
     // Save file first.
-    var basedir = path.join('/raid/qihong/demo/tmp', Date.now().toString());
-    fs.mkdirSync(basedir, 0744);
-    var videoLocation = path.join(basedir, 'video');
+    var basedir = path.join('/home/cisco/qishao/WebExDemo/tmp', Date.now().toString());
+    fs.mkdirSync(basedir, 0740);
+    var videoLocation = path.join(basedir, 'videofile');
     var webexfile = req.files.webexfile;
     webexfile.mv(videoLocation)
 	.then(function(err) {
@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
 		sr: sr,
 		user: user,
 		basedir: basedir,
-		video: videoLocation
+		videofile: videoLocation
 	    });
 	    task.save(function(err) {
 		if (err) {
