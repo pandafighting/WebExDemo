@@ -32,7 +32,7 @@ def Process(task):
             f.write(cmd[0] + ':' + cmd[1])
             f.write('\n')
     task['video_status'] = 1
-    task['video_output'] = os.path.join('soln', soln_id, 'video_output.txt')
+    task['video_output'] = os.path.join('/soln', soln_id, 'video_output.txt')
 
 if __name__ == "__main__":
     while True:

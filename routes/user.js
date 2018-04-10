@@ -22,8 +22,7 @@ router.get('/:userid', function(req, res, next) {
 	    if (audio_status == 0) {
 		task.audio_status_msg = 'Waiting for audio translation';
 	    } else {
-		//task.video_status_msg = '<a href="' task.audio_output + '">audio_output.txt</a>';
-		task.audio_status_msg = '<a href="">TODO</a>';
+		// TODO
 	    }
 	    return task;
 	});

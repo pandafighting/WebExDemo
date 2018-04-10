@@ -1,0 +1,5 @@
+00:00:44:show od
+00:01:01:show vpc brief
+00:00:49:show od
+00:00:49:show mod
+00:00:49:show 

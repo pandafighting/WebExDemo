@@ -7,3 +7,7 @@ mongod --fork --logpath mongodb/log/log.txt --dbpath mongodb/data/ --port 4000
 
 # start web server
 npm start
+
+# start video worker
+cd /home/cisco/qishao/WebExDemo/workers/
+source activate py36clone & python video_transcript.py
