@@ -10,11 +10,20 @@ router.get('/:userid', function(req, res, next) {
 	    return;
 	}
 	annotatedTasks = tasks.map(task => {
-	    const status = task.status;
-	    if (status == 0) {
-		task.status_name = 'Processing';
+	    const video_status = task.video_status;
+	    if (video_status == 0) {
+		task.video_status_msg = 'Waiting for video analysis';
+	    } else if (video_status == -1) {
+		task.video_status_msg = 'Error occurred';
 	    } else {
-		task.status_name = 'Unknown';
+		// No message.
+	    }
+	    const audio_status = task.audio_status;
+	    if (audio_status == 0) {
+		task.audio_status_msg = 'Waiting for audio translation';
+	    } else {
+		//task.video_status_msg = '<a href="' task.audio_output + '">audio_output.txt</a>';
+		task.audio_status_msg = '<a href="">TODO</a>';
 	    }
 	    return task;
 	});

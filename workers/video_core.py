@@ -6,6 +6,10 @@ import tensorflow as tf
 import numpy as np
 import pkg_resources
 
+import warnings
+warnings.filterwarnings("ignore")
+os.environ["TF_CPP_MIN_LOG_LEVEL"]="2"
+
 from tesserocr import PyTessBaseAPI, RIL, PSM
 from PIL import Image
 
@@ -25,7 +29,7 @@ def video_to_images(video_name, images_dir, window_size=1000):
             cv2.imwrite(images_dir + 'frame%s.png' % f"{count:015b}", image)
             count += 1
         else:
-            print(count, success)
+            print("Found", count - 1, "frames")
         window += window_size
 
 
@@ -45,8 +49,9 @@ def remove_duplicates(images_path):
 
         # optimize with map to get [true, false] then apply rm to list of duplicates
 
-        if previous_image_sum - current_image_sum > 5500:
-            os.system('rm ' + previous_image)
+        if abs(previous_image_sum - current_image_sum) > 5500:
+            os.system("rm '{}'".format(previous_image))
+            
         previous_image = current_image
         previous_image_sum = current_image_sum
 
@@ -95,7 +100,7 @@ def crop_terminals(image_paths):
 
 def get_segments(image_dir):
     current_dir = image_dir[:-4] + '/'
-    os.system("mkdir {}".format(current_dir))
+    os.system("mkdir '{}'".format(current_dir))
     # print(image_dir)
     img = cv2.imread(image_dir, 0)
     height, width = img.shape
@@ -133,17 +138,15 @@ def call_tesseract(cv_image, image_dir):
         with open(image_dir[:-4] + ".txt", "w") as text_file:
             print(f"{ocr_result}", file=text_file)
 
-
+                    
 def join_txt_files(path):
-    # print(path.split('/')[-2])
     txt_filenames = [path + f for f in os.listdir(path) if os.path.join(path, f).endswith(".txt")]
     with open(path[:-1] + '.txt', 'w') as outfile:
         for txt_file in txt_filenames:
             with open(txt_file) as infile:
                 for line in infile:
-                    outfile.write(line)
-                    # outfile.write('\n')
-
+                    if not line.isspace():
+                        outfile.write(line)
 # !!!
 
 
@@ -240,7 +243,7 @@ def extract_commands(path):
 def get_transcript_commands(video_path):
     # print("Current video name: ", os.path.basename(video_path))
     images_path = os.path.dirname(video_path) + '/' + os.path.basename(video_path).split('.')[0]
-    os.system('mkdir ' + images_path)
+    os.system("mkdir '{}'".format(images_path))
     images_path += '/'
     video_to_images(video_path, images_path)
     print("Converted video into images!")
@@ -262,6 +265,7 @@ def get_transcript_commands(video_path):
     commands = extract_commands(images_path)
     print("Extracted commands!")
     # print(commands)
+    os.system("rm -rf '{}'".format(images_path))
     return commands
 
 
@@ -269,7 +273,7 @@ def get_full_transcript(video_path):
     # print("Current video name: ", os.path.basename(video_path))
     print("Converting video into images...")
     images_path = os.path.dirname(video_path) + '/' + os.path.basename(video_path).split('.')[0]
-    os.system('mkdir ' + images_path)
+    os.system("mkdir '{}'".format(images_path))
     images_path += '/'
     video_to_images(video_path, images_path)
     print("Removing duplicates...")
@@ -291,7 +295,13 @@ def get_full_transcript(video_path):
     for i in file_names[1:]:
         current_file = read_file(i)
         full_transcript = glue_strings(full_transcript, current_file)
-
-    # file_out = open("full_transcript.txt", "w")
-    # print(full_transcript, file=file_out)
+    os.system("rm -rf '{}'".format(images_path))
     return full_transcript
+
+
+def try_transcript_commands(video_path):
+    try:
+        commands = get_transcript_commands(video_path)
+        return (0, commands)
+    except:
+        return (1, "error")

@@ -40,7 +40,8 @@ router.post('/', function(req, res, next) {
     var basedir = path.join('/home/cisco/qishao/WebExDemo/tmp', Date.now().toString());
     fs.mkdirSync(basedir, 0740);
     var webexfile = req.files.webexfile;
-    var videoLocation = path.join(basedir, webexfile.name);
+    var videoFilename = webexfile.name;
+    var videoLocation = path.join(basedir, videoFilename);
     webexfile.mv(videoLocation)
 	.then(function(err) {
 	    if (err) {
@@ -52,7 +53,7 @@ router.post('/', function(req, res, next) {
 		sr: sr,
 		user: user,
 		basedir: basedir,
-		videofile: videoLocation
+		videofile: videoFilename
 	    });
 	    task.save(function(err) {
 		if (err) {

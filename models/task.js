@@ -17,7 +17,19 @@ var taskSchema = mongoose.Schema({
 	type: String,
 	required: true
     },
-    status: {
+    video_status: {
+	type: Number,
+	get: v => Math.round(v),
+	set: v => Math.round(v),
+	required: true,
+	default: 0
+    },
+    video_output: {
+	type: String,
+	required: false,
+	default: ""
+    },
+    audio_status: {
 	type: Number,
 	get: v => Math.round(v),
 	set: v => Math.round(v),

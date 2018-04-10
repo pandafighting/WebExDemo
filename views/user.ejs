@@ -14,7 +14,9 @@
 	  <tr>
 	    <th>RequestId</th>
 	    <th>SR#</th>
-	    <th>Status</th>
+	    <th>UploadedFile</th>
+	    <th>VideoStatus</th>
+	    <th>AudioStatus</th>
 	</tr></thead>
 	<tbody>
 	  <% for (var i = 0; i < tasks.length; i++) { %>
@@ -26,7 +28,17 @@
 	      <%= tasks[i].sr %>
 	    </td>
 	    <td>
-	      <%= tasks[i].status_name %>
+	      <%= tasks[i].videofile %>
+	    </td>
+	    <td>
+	      <% if (tasks[i].video_status == 1) { %>
+	      <a href="<%= tasks[i].video_output %>">video_output.txt</a>
+	      <% } else { %>
+	      <%= tasks[i].video_status_msg %>
+	      <% } %>
+	    </td>
+	    <td>
+	      <%= tasks[i].audio_status_msg %>
 	    </td>
 	  </tr>
 	  <% } %>
