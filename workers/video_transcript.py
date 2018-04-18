@@ -39,6 +39,11 @@ if __name__ == "__main__":
         for task in _tasks.find({'video_status': 0}):
             Process(task)
             print('updating',task, '...\n')
-            print(_tasks.replace_one({'_id': task['_id']}, task))
+            print(_tasks.update_one(
+                {'_id': task['_id']}, 
+                { '$set': {
+                    'video_status': task['video_status'],
+                    'video_output': task['video_output']
+                }}))
         print('No more task, sleep for 5s')
         time.sleep(5)

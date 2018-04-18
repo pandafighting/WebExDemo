@@ -38,7 +38,11 @@
 	      <% } %>
 	    </td>
 	    <td>
+	      <% if (tasks[i].audio_status == 1) { %>
+	      <a href="<%= tasks[i].audio_output %>">audio_output.txt</a>
+	      <% } else { %>
 	      <%= tasks[i].audio_status_msg %>
+	      <% } %>
 	    </td>
 	  </tr>
 	  <% } %>
