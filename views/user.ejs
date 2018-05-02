@@ -17,6 +17,7 @@
 	    <th>UploadedFile</th>
 	    <th>VideoStatus</th>
 	    <th>AudioStatus</th>
+	    <th>GoogleAudioStatus</th>
 	</tr></thead>
 	<tbody>
 	  <% for (var i = 0; i < tasks.length; i++) { %>
@@ -42,6 +43,13 @@
 	      <a href="<%= tasks[i].audio_output %>">audio_output.txt</a>
 	      <% } else { %>
 	      <%= tasks[i].audio_status_msg %>
+	      <% } %>
+	    </td>
+	    <td>
+	      <% if (tasks[i].google_audio_status == 1) { %>
+	      <a href="<%= tasks[i].google_audio_output %>">google_audio_output.txt</a>
+	      <% } else { %>
+	      Error Occurred.
 	      <% } %>
 	    </td>
 	  </tr>
