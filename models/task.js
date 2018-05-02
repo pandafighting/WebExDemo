@@ -41,6 +41,18 @@ var taskSchema = mongoose.Schema({
 	required: false,
 	default: ""
     },
+    google_audio_status: {
+	type: Number,
+	get: v => Math.round(v),
+	set: v => Math.round(v),
+	required: true,
+	default: 0
+    },
+    google_audio_output: {
+	type: String,
+	required: false,
+	default: ""
+    },
     email_status: {
 	type: Number,
 	get: v => Math.round(v),

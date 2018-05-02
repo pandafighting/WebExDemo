@@ -26,6 +26,15 @@ router.get('/:userid', function(req, res, next) {
 	    } else {
 		// No message.
 	    }
+	    const google_audio_status = task.google_audio_status;
+	    if (google_audio_status == 0) {
+		task.google_audio_status_msg = 'Waiting for Google  audio translation';
+	    } else if (google_audio_status == -1) {
+		task.google_audio_status_msg = 'Error occured';
+	    } else {
+		// No message.
+	    }
+
 	    return task;
 	});
 	res.render('user', { 'tasks': annotatedTasks });
